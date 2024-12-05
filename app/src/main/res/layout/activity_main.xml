@@ -2,24 +2,78 @@
 <layout>
 <data>
     <variable
-        name="dind"
-        type="ru.example.a05122024.MainActivity" />
+        name="ViewModel"
+        type="ru.example.a05122024.BaseViewModel" />
 </data>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
-
+    android:orientation="vertical"
+    android:gravity="center"
+   >
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:textSize="20sp"
+        android:text="Переход по номеру"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="17sp"
+        android:text="88005553535"
+        android:textColor="#D3FD4DFD"
+        android:onClick="@{()->ViewModel.clickNumber()}"
+        />
+    <TextView
+        android:layout_marginTop="15dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:text="Сайт МИРЭА"
 
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="17sp"
+        android:text="Ссылка"
+        android:textColor="#D3FD4DFD"
+        android:onClick="@{()->ViewModel.ClickUrl()}"
+        />
+    <TextView
+        android:layout_marginTop="15dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:text="Отправить письмо"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="17sp"
+        android:text="mail@mail.ru"
+        android:textColor="#D3FD4DFD"
+        android:onClick="@{()->ViewModel.ClickEmail()}"
+        />
+    <TextView
+        android:layout_marginTop="15dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:text="добавить картинку"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="17sp"
+        android:text="выбрать"
+        android:textColor="#D3FD4DFD"
+        android:onClick="@{()->ViewModel.ChooseImage()}"
+        />
+    <ImageView
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_marginTop="15dp"
+        android:id="@+id/img"/>
 </LinearLayout>
 </layout>

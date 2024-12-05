@@ -12,7 +12,7 @@ class MainActivity : AppCompatActivity() {
         val viewModel:BaseViewModel = ViewModelProvider(this)[BaseViewModel::class.java]
         val binding:ActivityMainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         setContentView(binding.root)
-        viewModel.initBase(this)
+        viewModel.initBase(this, binding)
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
 

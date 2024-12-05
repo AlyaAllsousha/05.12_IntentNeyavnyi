@@ -2,7 +2,9 @@ package ru.example.a05122024
 
 import android.content.Intent
 import android.net.Uri
+import android.provider.MediaStore
 import androidx.activity.result.ActivityResultCallback
+import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModel
@@ -11,9 +13,17 @@ import ru.example.a05122024.databinding.ActivityMainBinding
 class BaseViewModel:ViewModel() {
     var activity: AppCompatActivity? = null
     var  binding:ActivityMainBinding? = null
+    var launcher: ActivityResultLauncher<Intent>? = null
     fun initBase(activity:AppCompatActivity, binding: ActivityMainBinding){
         this.activity = activity
         this.binding = binding
+        launcher =  activity.registerForActivityResult(
+            ActivityResultContracts.StartActivityForResult(),
+            ActivityResultCallback {
+                val uriImg = it.data?.data
+                binding.img.setImageURI(uriImg)
+            }
+        )
     }
     fun clickNumber(){
         val uri = Uri.parse("tel:88005553535")
@@ -37,13 +47,10 @@ class BaseViewModel:ViewModel() {
         intent.putExtra(Intent.EXTRA_TEXT, "Это основное тело письма")
         activity?.startActivity(intent)
     }
+
     fun ChooseImage(){
-        val intent = Intent(Intent.ACTION_PICK, )
+        val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+        launcher?.launch(intent)
     }
-    val launcher =  activity?.registerForActivityResult(
-        ActivityResultContracts.StartActivityForResult(),
-        ActivityResultCallback {
-            val uriImg = it.data?.data
-        }
-    )
+
 }

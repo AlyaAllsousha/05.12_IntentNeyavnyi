@@ -5,6 +5,7 @@ import android.net.Uri
 import android.provider.MediaStore
 import androidx.activity.result.ActivityResultCallback
 import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModel
@@ -14,6 +15,7 @@ class BaseViewModel:ViewModel() {
     var activity: AppCompatActivity? = null
     var  binding:ActivityMainBinding? = null
     var launcher: ActivityResultLauncher<Intent>? = null
+    var launcher2:ActivityResultLauncher<PickVisualMediaRequest>? = null
     fun initBase(activity:AppCompatActivity, binding: ActivityMainBinding){
         this.activity = activity
         this.binding = binding
@@ -21,6 +23,13 @@ class BaseViewModel:ViewModel() {
             ActivityResultContracts.StartActivityForResult(),
             ActivityResultCallback {
                 val uriImg = it.data?.data
+                binding.img.setImageURI(uriImg)
+            }
+        )
+        launcher2 = activity?.registerForActivityResult(
+            ActivityResultContracts.PickVisualMedia(),
+            ActivityResultCallback {
+                var  uriImg = it
                 binding.img.setImageURI(uriImg)
             }
         )
@@ -50,7 +59,10 @@ class BaseViewModel:ViewModel() {
 
     fun ChooseImage(){
         val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
-        launcher?.launch(intent)
+        launcher2?.launch(
+            PickVisualMediaRequest(
+                ActivityResultContracts.PickVisualMedia.ImageOnly))
+
     }
 
 }
